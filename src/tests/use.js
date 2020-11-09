@@ -14,7 +14,6 @@ export default apiKey => {
   const [responseData, setResponseData] = useState(null)
   const [responseStatus, setResponseStatus] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [enabled, setEnabled] = useState(false)
   const [pagarmeClient, setPagarmeClient] = useState(null)
 
   const setupTest = async () => {
@@ -61,7 +60,7 @@ export default apiKey => {
   const prepareTest = async formData => {
     const requestData = cleanDeep(await test.prepare(formData, pagarmeClient))
 
-    setEnabled(true)
+
     setFormData(formData)
     setRequestData(requestData)
   }
@@ -75,8 +74,6 @@ export default apiKey => {
     requestData,
     responseData,
     responseStatus,
-    enabled,
-    setEnabled,
     loading
   }
 }

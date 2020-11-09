@@ -35,9 +35,7 @@ function App() {
     fakers,
     requestData,
     responseData,
-    responseStatus,
-    enabled,
-    setEnabled
+    responseStatus
   } = useTests(apiKey)
   const { test, setTest, executeTest, prepareTest } = useTest()
   const { formData, setFormData } = useFormData()
