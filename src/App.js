@@ -35,7 +35,9 @@ function App() {
     fakers,
     requestData,
     responseData,
-    responseStatus
+    responseStatus,
+    enabled,
+    setEnabled
   } = useTests(apiKey)
   const { test, setTest, executeTest, prepareTest } = useTest()
   const { formData, setFormData } = useFormData()
@@ -115,6 +117,7 @@ function App() {
                   formData={formData}
                   schema={schema}
                   onSubmit={$event => prepareTest($event.formData)}
+                  onChange={$event => setEnabled(false)}
                 >
                   <div>
                     <Button variant="success" className="mr-3" type="submit">
@@ -138,7 +141,7 @@ function App() {
                       size="sm"
                       className="mb-3 ml-3"
                       style={{ verticalAlign: '0px' }}
-                      disabled={!requestData}
+                      disabled={!enabled}
                       onClick={executeTest}
                     >
                       Executar requisição

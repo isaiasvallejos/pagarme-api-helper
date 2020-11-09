@@ -1,5 +1,5 @@
 export default async pagarmeClient => {
-  const cards = await pagarmeClient.cards.all()
+  const cards = await pagarmeClient.cards.all({ count: 50 })
   return {
     cards: {
       type: 'string',

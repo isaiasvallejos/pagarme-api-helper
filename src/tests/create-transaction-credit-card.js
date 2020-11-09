@@ -1,5 +1,6 @@
 import clientSchemas from '../schemas/client'
 import { calculateAmount } from './utils/create-transaction'
+import faker from '../faker'
 
 export default {
   id: 'create-transaction-credit-card',
@@ -12,10 +13,6 @@ export default {
       },
       type: 'object',
       properties: {
-        amount: {
-          title: 'Amount',
-          type: 'integer'
-        },
         card_holder_name: {
           title: 'Card Holder Name',
           type: 'string'
@@ -80,7 +77,38 @@ export default {
         }
       }
     }
-    const fakers = []
+    const fakers = [
+      {
+        title: 'Fake Credit Card',
+        act(formData) {
+          return { ...formData, ...faker.creditCard() }
+        }
+      },
+      {
+        title: 'Fake Customer',
+        act(formData) {
+          return { ...formData, customer: faker.customer() }
+        }
+      },
+      {
+        title: 'Fake Items',
+        act(formData) {
+          return { ...formData, items: faker.items() }
+        }
+      },
+      {
+        title: 'Fake Billing',
+        act(formData) {
+          return { ...formData, billing: faker.billing() }
+        }
+      },
+      {
+        title: 'Fake Shipping',
+        act(formData) {
+          return { ...formData, shipping: faker.shipping() }
+        }
+      }
+    ]
 
     return { schema, fakers }
   },

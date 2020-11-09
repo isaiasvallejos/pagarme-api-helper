@@ -1,33 +1,24 @@
-import { calculateAmount } from './utils/create-transaction'
 import clientSchemas from '../schemas/client'
+import { calculateAmount } from './utils/create-transaction'
 import faker from '../faker'
 
 export default {
-  id: 'create-transaction-credit-card-one-click-buy',
-  title: 'Criar Transação de Cartão de Crédito - One Click Buy',
+  id: 'create-transaction-boleto',
+  title: 'Criar Transação de Boleto',
   async setup(schemas, pagarmeClient) {
     const schema = {
       schemas: {
         ...schemas,
-        ...(await clientSchemas.loadRecipients(pagarmeClient)),
-        ...(await clientSchemas.loadCards(pagarmeClient))
+        ...(await clientSchemas.loadRecipients(pagarmeClient))
       },
       type: 'object',
       properties: {
-        card_id: {
-          title: 'Cards',
-          $ref: '#/schemas/cards'
-        },
         payment_method: {
           title: 'Payment Type',
           type: 'string',
-          enum: ['credit_card'],
-          enumNames: ['Credit Card'],
-          default: 'credit_card'
-        },
-        installments: {
-          title: 'Installments',
-          type: 'number'
+          enum: ['boleto'],
+          enumNames: ['Boleto'],
+          default: 'boleto'
         },
         split_rules: {
           $ref: '#/schemas/splitRules'
@@ -49,11 +40,6 @@ export default {
             title: 'Item',
             $ref: '#/schemas/item'
           }
-        },
-        capture: {
-          title: 'Capture',
-          type: 'boolean',
-          default: true
         },
         async: {
           title: 'Async',

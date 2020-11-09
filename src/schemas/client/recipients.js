@@ -1,5 +1,5 @@
 export default async pagarmeClient => {
-  const recipients = await pagarmeClient.recipients.all()
+  const recipients = await pagarmeClient.recipients.all({ count: 50 })
   return {
     recipients: {
       type: 'string',

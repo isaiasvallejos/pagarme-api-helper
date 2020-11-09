@@ -1,13 +1,12 @@
 import clientSchemas from '../schemas/client'
 
 export default {
-  id: 'refund-partial-transaction',
-  title: 'Realizar Estorno Parcial de Transação',
+  id: 'chargeback-transaction',
+  title: 'Chargeback',
   async setup(schemas, pagarmeClient) {
     const schema = {
       schemas: {
         ...schemas,
-        ...(await clientSchemas.loadBankAccounts(pagarmeClient)),
         ...(await clientSchemas.loadTransactions(pagarmeClient))
       },
       type: 'object',
@@ -15,14 +14,6 @@ export default {
         transaction_id: {
           title: 'Transaction',
           $ref: '#/schemas/transactions'
-        },
-        amount: {
-          title: 'Amount',
-          type: 'integer'
-        },
-        bank_account_id: {
-          title: 'Bank Account',
-          $ref: '#/schemas/bankAccounts'
         }
       }
     }
@@ -31,12 +22,12 @@ export default {
     return { schema, fakers }
   },
   async prepare(formData, pagarmeClient) {
-    return { ...formData }
+    return { ...formData, status: 'chargedback' }
   },
   async execute(requestData, pagarmeClient) {
-    return pagarmeClient.transactions.refund({
+    return pagarmeClient.transactions.update({
       id: requestData.transaction_id,
-      amount: requestData.amount
+      status: requestData.status
     })
   }
 }

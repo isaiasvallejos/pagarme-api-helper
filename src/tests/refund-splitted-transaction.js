@@ -1,14 +1,15 @@
 import clientSchemas from '../schemas/client'
 
 export default {
-  id: 'refund-partial-transaction',
-  title: 'Realizar Estorno Parcial de Transação',
+  id: 'refund-splitted-transaction',
+  title: 'Realizar Estorno de Transação com Divisão/Split',
   async setup(schemas, pagarmeClient) {
     const schema = {
       schemas: {
         ...schemas,
         ...(await clientSchemas.loadBankAccounts(pagarmeClient)),
-        ...(await clientSchemas.loadTransactions(pagarmeClient))
+        ...(await clientSchemas.loadTransactions(pagarmeClient)),
+        ...(await clientSchemas.loadRecipients(pagarmeClient))
       },
       type: 'object',
       properties: {
@@ -23,6 +24,14 @@ export default {
         bank_account_id: {
           title: 'Bank Account',
           $ref: '#/schemas/bankAccounts'
+        },
+        split_rules: {
+          $ref: '#/schemas/splitRules'
+        },
+        async: {
+          title: 'Async',
+          type: 'boolean',
+          default: true
         }
       }
     }
@@ -36,7 +45,8 @@ export default {
   async execute(requestData, pagarmeClient) {
     return pagarmeClient.transactions.refund({
       id: requestData.transaction_id,
-      amount: requestData.amount
+      amount: requestData.amount,
+      split_rules: requestData.split_rules
     })
   }
 }
