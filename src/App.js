@@ -1,7 +1,4 @@
-import pagarme from 'pagarme'
-import { head } from 'ramda'
-
-import { createRef, useEffect, useState } from 'react'
+import { useState } from 'react'
 import { withTheme } from '@rjsf/core'
 import { Theme as Bootstrap4Theme } from '@rjsf/bootstrap-4'
 import {
@@ -14,8 +11,9 @@ import {
   Container,
   Row,
   Col,
-  Badge
+  Badge, NavLink
 } from 'react-bootstrap'
+import { FaGithub } from 'react-icons/fa';
 import useTests from './tests/use'
 
 import './App.css'
@@ -37,7 +35,7 @@ function App() {
     responseData,
     responseStatus
   } = useTests(apiKey)
-  const { test, setTest, executeTest, prepareTest } = useTest()
+  const { test, setTest, executeTest, prepareTest, fakeTest } = useTest()
   const { formData, setFormData } = useFormData()
 
   const updateApiKey = () => {
@@ -89,6 +87,9 @@ function App() {
               Atualizar key
             </Button>
           </Form>
+          <Button size="md" variant="success" className="ml-2">
+            <FaGithub /> Github
+          </Button>
         </Navbar.Collapse>
       </Navbar>
       <Container fluid className="p-3">
@@ -106,7 +107,7 @@ function App() {
                     className="ml-2 mb-3"
                     size="sm"
                     type="button"
-                    onClick={$event => prepareTest(faker.act(formData))}
+                    onClick={$event => fakeTest(faker, formData)}
                   >
                     {faker.title}
                   </Button>
@@ -139,11 +140,16 @@ function App() {
                       className="mb-3 ml-3"
                       style={{ verticalAlign: '0px' }}
                       disabled={!requestData}
-                      onClick={executeTest}
+                      onClick={() => executeTest(formData)}
                     >
                       Executar requisição
                     </Button>
                   </Form.Label>
+                  {formData && formData.postback_follow_url &&
+                    <div className="mb-3">
+                      <b>Acompanhe os postbacks gerados:</b> <a href={formData.postback_follow_url}>Request.bin</a>
+                    </div>
+                  }
                   <Form.Control
                     as="textarea"
                     rows={10}

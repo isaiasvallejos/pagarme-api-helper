@@ -14,22 +14,22 @@ export default {
       type: 'object',
       properties: {
         transaction_id: {
-          title: 'Transaction',
+          title: 'Transação',
           $ref: '#/schemas/transactions'
         },
         amount: {
-          title: 'Amount',
+          title: 'Valor',
           type: 'integer'
         },
         bank_account_id: {
-          title: 'Bank Account',
+          title: 'Conta bancária',
           $ref: '#/schemas/bankAccounts'
         },
         split_rules: {
           $ref: '#/schemas/splitRules'
         },
         async: {
-          title: 'Async',
+          title: 'Assíncrono',
           type: 'boolean',
           default: true
         }

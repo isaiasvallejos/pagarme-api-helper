@@ -1,4 +1,4 @@
-import faker from 'faker'
+import faker from 'faker/locale/pt_BR'
 
 export default () => [
   {

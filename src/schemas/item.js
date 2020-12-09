@@ -11,28 +11,30 @@ export default {
       type: 'string'
     },
     unit_price: {
-      title: 'Unit Price',
+      title: 'Preço unitário',
       type: 'number'
     },
     quantity: {
-      title: 'Quantity',
+      title: 'Quantidade',
       type: 'number'
     },
     tangible: {
-      title: 'Tangible',
+      title: 'Bem físico',
       type: 'boolean'
     },
     category: {
-      title: 'Category',
+      title: 'Categoria',
       type: 'string'
     },
     venue: {
-      title: 'Venue',
-      type: 'string'
+      title: 'Local',
+      type: 'string',
+      description: 'Apenas para eventos'
     },
     date: {
       title: 'Date',
-      type: 'string'
+      type: 'string',
+      description: 'Apenas para eventos. Formato AAAA-MM-DD'
     }
   }
 }

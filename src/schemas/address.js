@@ -1,37 +1,39 @@
 export default {
-  title: 'Address',
+  title: 'Endereço',
   type: 'object',
   properties: {
     street: {
-      title: 'Street',
+      title: 'Rua',
       type: 'string'
     },
     street_number: {
-      title: 'Street Number',
+      title: 'Número',
       type: 'string'
     },
     zipcode: {
-      title: 'Zipcode',
-      type: 'string'
+      title: 'CEP',
+      type: 'string',
+      description: 'Deve conter uma numeração de 8 dígitos.'
     },
     country: {
-      title: 'Country',
-      type: 'string'
+      title: 'País',
+      type: 'string',
+      description: 'Duas letras minúsculas. Deve seguir o padão ISO 3166-1 alpha-2.'
     },
     state: {
-      title: 'State',
+      title: 'Estado',
       type: 'string'
     },
     city: {
-      title: 'City',
+      title: 'Cidade',
       type: 'string'
     },
     neighborhood: {
-      title: 'Neighborhood',
+      title: 'Bairro',
       type: 'string'
     },
     complementary: {
-      title: 'Complementary',
+      title: 'Complemento',
       type: 'string'
     }
   }

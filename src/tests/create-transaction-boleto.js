@@ -14,7 +14,7 @@ export default {
       type: 'object',
       properties: {
         payment_method: {
-          title: 'Payment Type',
+          title: 'Tipo de pagamento',
           type: 'string',
           enum: ['boleto'],
           enumNames: ['Boleto'],
@@ -34,7 +34,7 @@ export default {
           $ref: '#/schemas/shipping'
         },
         items: {
-          title: 'Items',
+          title: 'Itens',
           type: 'array',
           items: {
             title: 'Item',
@@ -42,39 +42,47 @@ export default {
           }
         },
         async: {
-          title: 'Async',
+          title: 'Assíncrono',
           type: 'boolean',
-          default: true
+          default: true,
+          description: 'A resposta da transação é recebida na hora se marcado'
         },
         postback_url: {
           title: 'Postback URL',
-          type: 'string'
+          type: 'string',
+          description: 'Endpoint do seu sistema que receberá informações a cada atualização da transação. Caso você defina este parâmetro, o processamento da transação se torna assíncrono.'
         }
       }
     }
     const fakers = [
       {
-        title: 'Fake Customer',
-        act(formData) {
+        title: 'Gerar Cliente',
+        async act(formData) {
           return { ...formData, customer: faker.customer() }
         }
       },
       {
-        title: 'Fake Items',
+        title: 'Gerar Itens',
         act(formData) {
           return { ...formData, items: faker.items() }
         }
       },
       {
-        title: 'Fake Billing',
+        title: 'Gerar Cobrança',
         act(formData) {
           return { ...formData, billing: faker.billing() }
         }
       },
       {
-        title: 'Fake Shipping',
+        title: 'Gerar Entrega',
         act(formData) {
           return { ...formData, shipping: faker.shipping() }
+        }
+      },
+      {
+        title: 'Gerar Postback',
+        async act(formData) {
+          return { ...formData, ...(await faker.postbackUrl()) }
         }
       }
     ]

@@ -3,23 +3,24 @@ export default {
   type: 'object',
   properties: {
     name: {
-      title: 'Name',
+      title: 'Nome',
       type: 'string'
     },
     fee: {
-      title: 'Fee',
+      title: 'Taxa',
       type: 'number'
     },
     delivery_date: {
-      title: 'Delivery Date',
-      type: 'string'
+      title: 'Data de envio',
+      type: 'string',
+      description: 'Formato AAAA-MM-DD'
     },
     expedited: {
-      title: 'Expedited',
+      title: 'Entrega expressa',
       type: 'boolean'
     },
     address: {
-      title: 'Shipping • Address',
+      title: 'Entrega • Endereço',
       type: 'object',
       $ref: '#/schemas/address'
     }

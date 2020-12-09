@@ -45,8 +45,16 @@ export default apiKey => {
     startPagarmeClient()
   }, [apiKey])
 
-  const executeTest = async () => {
+  const prepareTest = async formData => {
+    const requestData = cleanDeep(await test.prepare(formData, pagarmeClient))
+
+    setFormData(formData)
+    setRequestData(requestData)
+  }
+
+  const executeTest = async formData => {
     try {
+      await prepareTest(formData)
       const data = await test.execute(requestData, pagarmeClient)
 
       setResponseData(data)
@@ -57,16 +65,13 @@ export default apiKey => {
     }
   }
 
-  const prepareTest = async formData => {
-    const requestData = cleanDeep(await test.prepare(formData, pagarmeClient))
-
-
-    setFormData(formData)
-    setRequestData(requestData)
+  const fakeTest = async (faker, formData) => {
+    const data = await faker.act(formData)
+    prepareTest(data)
   }
 
   return {
-    useTest: () => ({ test, setTest, executeTest, prepareTest }),
+    useTest: () => ({ test, setTest, executeTest, prepareTest, fakeTest }),
     tests,
     schema,
     fakers,

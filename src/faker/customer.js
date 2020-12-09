@@ -1,5 +1,7 @@
-import faker from 'faker'
+import faker from 'faker/locale/pt_BR'
 import * as cpfGenerator from 'gerador-validador-cpf'
+
+const generatePhoneNumber = () => `+55${faker.phone.phoneNumberFormat().replace(/[^0-9.]/g, '')}`
 
 export default () => ({
   external_id: faker.random.number().toString(),
@@ -13,5 +15,5 @@ export default () => ({
       number: cpfGenerator.generate()
     }
   ],
-  phone_numbers: ['+55333333333', '+55888888888']
+  phone_numbers: [generatePhoneNumber(), generatePhoneNumber()]
 })

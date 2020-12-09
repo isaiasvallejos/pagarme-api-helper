@@ -9,15 +9,15 @@ export default {
       type: 'object',
       properties: {
         bank_code: {
-          title: 'Bank Code',
+          title: 'Código do Banco',
           type: 'string'
         },
         agencia: {
-          title: 'Agencia',
+          title: 'Agência',
           type: 'string'
         },
         agencia_dv: {
-          title: 'Agencia DV',
+          title: 'Agência - Dígito Verificador',
           type: 'string'
         },
         conta: {
@@ -25,11 +25,11 @@ export default {
           type: 'string'
         },
         conta_dv: {
-          title: 'Conta DV',
+          title: 'Conta - Dígito Verificador',
           type: 'string'
         },
         type: {
-          title: 'Type',
+          title: 'Tipo',
           enum: [
             'conta_corrente',
             'conta_poupanca',
@@ -38,17 +38,18 @@ export default {
           ],
           enumNames: [
             'Conta Corrente',
-            'Conta Poupanca',
+            'Conta Poupança',
             'Conta Corrente Conjunta',
-            'Conta Poupanca Conjunta'
+            'Conta Poupança Conjunta'
           ]
         },
         document_number: {
-          title: 'Document Number',
-          type: 'string'
+          title: 'Número de documento',
+          type: 'string',
+          description: 'CPF/CNPJ atrelado à conta'
         },
         legal_name: {
-          title: 'Legal Name',
+          title: 'Nome/Razão social',
           type: 'string'
         }
       }

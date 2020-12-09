@@ -13,7 +13,7 @@ export default {
       type: 'object',
       properties: {
         transaction_id: {
-          title: 'Transaction',
+          title: 'Transação',
           $ref: '#/schemas/transactions'
         },
         split_rules: {

@@ -14,30 +14,30 @@ export default {
       type: 'object',
       properties: {
         card_holder_name: {
-          title: 'Card Holder Name',
+          title: 'Nome do portador do cartão',
           type: 'string'
         },
         card_expiration_date: {
-          title: 'Card Expiration Date',
+          title: 'Data de validade do cartão',
           type: 'string'
         },
         card_number: {
-          title: 'Card Number',
+          title: 'Número do cartão',
           type: 'string'
         },
         card_cvv: {
-          title: 'Card CVV',
+          title: 'CVV do cartão',
           type: 'string'
         },
         payment_method: {
-          title: 'Payment Type',
+          title: 'Tipo de pagamento',
           type: 'string',
           enum: ['credit_card'],
-          enumNames: ['Credit Card'],
+          enumNames: ['Cartão de Crédito'],
           default: 'credit_card'
         },
         installments: {
-          title: 'Installments',
+          title: 'Número de parcelas',
           type: 'number'
         },
         split_rules: {
@@ -50,24 +50,22 @@ export default {
           $ref: '#/schemas/billing'
         },
         shipping: {
-          title: 'Shipping',
           $ref: '#/schemas/shipping'
         },
         items: {
-          title: 'Items',
+          title: 'Itens',
           type: 'array',
           items: {
-            title: 'Item',
             $ref: '#/schemas/item'
           }
         },
         capture: {
-          title: 'Capture',
+          title: 'Capturar',
           type: 'boolean',
           default: true
         },
         async: {
-          title: 'Async',
+          title: 'Assíncrono',
           type: 'boolean',
           default: true
         },
@@ -79,33 +77,39 @@ export default {
     }
     const fakers = [
       {
-        title: 'Fake Credit Card',
+        title: 'Gerar Cartão de Crédito',
         act(formData) {
           return { ...formData, ...faker.creditCard() }
         }
       },
       {
-        title: 'Fake Customer',
+        title: 'Gerar Cliente',
         act(formData) {
           return { ...formData, customer: faker.customer() }
         }
       },
       {
-        title: 'Fake Items',
+        title: 'Gerar Itens',
         act(formData) {
           return { ...formData, items: faker.items() }
         }
       },
       {
-        title: 'Fake Billing',
+        title: 'Gerar Cobrança',
         act(formData) {
           return { ...formData, billing: faker.billing() }
         }
       },
       {
-        title: 'Fake Shipping',
+        title: 'Gerar Entrega',
         act(formData) {
           return { ...formData, shipping: faker.shipping() }
+        }
+      },
+      {
+        title: 'Gerar Postback',
+        async act(formData) {
+          return { ...formData, ...(await faker.postbackUrl()) }
         }
       }
     ]

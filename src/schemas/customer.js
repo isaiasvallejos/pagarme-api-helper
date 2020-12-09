@@ -1,13 +1,13 @@
 export default {
-  title: 'Customer',
+  title: 'Cliente',
   type: 'object',
   properties: {
     external_id: {
-      title: 'External ID',
+      title: 'ID Externo',
       type: 'string'
     },
     name: {
-      title: 'Name',
+      title: 'Nome',
       type: 'string'
     },
     email: {
@@ -15,36 +15,38 @@ export default {
       type: 'string'
     },
     country: {
-      title: 'Country',
+      title: 'País',
       type: 'string'
     },
     type: {
-      title: 'Type',
+      title: 'Tipo',
       enum: ['individual', 'corporation'],
-      enumNames: ['Individual', 'Corporation']
+      enumNames: ['Pessoa Física', 'Pessoa Jurídica']
     },
     phone_numbers: {
-      title: 'Customer • Phone Numbers',
+      title: 'Cliente • Telefones',
       type: 'array',
       items: {
-        title: 'Phone Number',
-        type: 'string'
+        title: 'Telefone',
+        type: 'string',
+        description: 'Formato +5511987654321'
       }
     },
     documents: {
-      title: 'Customer • Documents',
+      title: 'Cliente • Documentos',
       type: 'array',
       items: {
         type: 'object',
         properties: {
           type: {
-            title: 'Type',
+            title: 'Tipo',
+            description: 'Para compradores brasileiros, deve ser fornecido ao menos um CPF (no caso de pessoa física) ou CNPJ (no caso de pessoa jurídica). Para compradores internacionais, o documento pode ser um passaporte ou um campo outro.',
             type: 'string',
             enum: ['cnpj', 'cpf', 'passport', 'other'],
-            enumNames: ['CNPJ', 'CPF', 'Passaport', 'Other']
+            enumNames: ['CNPJ', 'CPF', 'Passaporte', 'Outro']
           },
           number: {
-            title: 'Number',
+            title: 'Número',
             type: 'string'
           }
         }

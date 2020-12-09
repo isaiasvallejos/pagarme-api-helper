@@ -13,11 +13,11 @@ export default {
       type: 'object',
       properties: {
         transaction_id: {
-          title: 'Transaction',
+          title: 'Transação',
           $ref: '#/schemas/transactions'
         },
         bank_account_id: {
-          title: 'Bank Account',
+          title: 'Conta bancária',
           $ref: '#/schemas/bankAccounts'
         }
       }

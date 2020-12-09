@@ -3,11 +3,11 @@ export default {
   type: 'object',
   properties: {
     name: {
-      title: 'Name',
+      title: 'Nome',
       type: 'string'
     },
     address: {
-      title: 'Billing • Address',
+      title: 'Cobrança • Endereço',
       type: 'object',
       $ref: '#/schemas/address'
     }

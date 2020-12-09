@@ -1,8 +1,8 @@
-import faker from 'faker'
+import faker from 'faker/locale/pt_BR'
 
 export default () => ({
   name: faker.name.findName(),
-  fee: 1000,
+  fee: parseInt((faker.commerce.price() * 1).toFixed(0)),
   address: {
     street: 'Rua Matrix',
     street_number: '9999',
